@@ -26,8 +26,7 @@ The project was inspired by ["Using Kafka Streams to Analyze Live Trading Activi
 Start up the Kafka/QuestDB stack:
 
 ```
-cd docker-compose
-docker-compose up
+docker-compose up -d
 ```
 
 Wait until all the components are healthy (look at Kafka Connect container logs).
@@ -35,7 +34,7 @@ Wait until all the components are healthy (look at Kafka Connect container logs)
 Post kafka-postgres-btc sink schema to Kafka Connect:
 
 ```
-curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" --data @postgres-sink.json http://localhost:8083/connectors
+curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" --data @postgres-sink-btc.json http://localhost:8083/connectors
 ```
 
 ### Python Setup
@@ -43,12 +42,14 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" --d
 Install the necessary packages:
 
 ```
+
 pip install -r requirements.txt
 ```
 
 Run the script to poll Coinbase API:
 
 ```
+python3 -m venv env
 python getData.py
 ```
 
